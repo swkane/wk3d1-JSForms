@@ -101,8 +101,27 @@ let formData = [
 let form = document.getElementById('fields');
 
 for (let i = 0; i < formData.length; i++) {
-  buildInput(i);
+  if (formData[i].type === "textarea") {
+    buildTextArea(i);
+  } else if (formData[i].type === "select") {
+    buildSelect(i);
+  } else {
+    buildInput(i);
+  }
+
 }
+
+function buildTextArea(x) {
+  // create an element called input
+  let textarea = document.createElement('textarea');
+  // give the input three attributes: type, id, and placeholder
+  textarea.setAttribute('type', formData[x].type);
+  textarea.setAttribute('id', formData[x].id);
+  textarea.setAttribute('placeholder', formData[x].label);
+  // append the input element as a child to the div with id = fields
+  form.appendChild(textarea);
+}
+
 function buildInput(x) {
   // create an element called input
   let input = document.createElement('input');
@@ -114,32 +133,30 @@ function buildInput(x) {
   form.appendChild(input);
 }
 
-function buildSelect(y) {
+function buildSelect(x) {
   // create an element called input
   let select = document.createElement('select');
   // give the input three attributes: type, id, and placeholder
-  select.setAttribute('type', formData[y].type);
-  select.setAttribute('id', formData[y].id);
-  select.setAttribute('label', formData[y].label);
+  select.setAttribute('type', formData[x].type);
+  select.setAttribute('id', formData[x].id);
   // create a loop to make it do this for each item in options array
-  for (let i = 0; i < formData[y].options.length; i++) {
+  for (let i = 0; i < formData[x].options.length; i++) {
     //create an option tag for an option in the option array
     let option = document.createElement('option');
     // add value attribute to option
-    option.setAttribute('value', formData[y].options[i].value);
+    option.setAttribute('value', formData[x].options[i].value);
     //create a node for the content of each option tag
-    let optionContent = document.createTextNode(formData[y].options[i].label);
+    let optionContent = document.createTextNode(formData[x].options[i].label);
     // append the input element as a child to the div with id = fields
     form.appendChild(select);
     //append the option node to the select node
     select.appendChild(option);
     //append the content node to the option node
     option.appendChild(optionContent);
+    // set placeholder text as "Select Language"
+    // option.setAttribute('label', formData[x].label);
   }
-
 }
-
-buildSelect(4);
 // create an if statement that checks each item in the formData array and constructs different forms based on if options is an empty array or not
 
 // should I abstract the code and create two separate constructor functions and then run each function?
