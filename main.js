@@ -122,17 +122,6 @@ function buildTextArea(x) {
   form.appendChild(textarea);
 }
 
-function buildInput(x) {
-  // create an element called input
-  let input = document.createElement('input');
-  // give the input three attributes: type, id, and placeholder
-  input.setAttribute('type', formData[x].type);
-  input.setAttribute('id', formData[x].id);
-  input.setAttribute('placeholder', formData[x].label);
-  // append the input element as a child to the div with id = fields
-  form.appendChild(input);
-}
-
 function buildSelect(x) {
   // create an element called input
   let select = document.createElement('select');
@@ -157,7 +146,16 @@ function buildSelect(x) {
     // option.setAttribute('label', formData[x].label);
   }
 }
-// create an if statement that checks each item in the formData array and constructs different forms based on if options is an empty array or not
 
-// should I abstract the code and create two separate constructor functions and then run each function?
+function buildInput(x) {
+  // create an element called input
+  let input = document.createElement('input');
+  // give the input three attributes: type, id, and placeholder
+  input.setAttribute('type', formData[x].type);
+  input.setAttribute('id', formData[x].id);
+  input.setAttribute('placeholder', formData[x].label);
+  // append the input element as a child to the div with id = fields
+  form.appendChild(input);
+}
+
 //
